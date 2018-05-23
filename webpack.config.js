@@ -1,3 +1,6 @@
+// Generate schema.js
+require('./schema.config');
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -29,7 +32,7 @@ module.exports = function (env, args) {
     resolve: {
       extensions: ['.js', '.jsx', '.vue'],
       alias: {
-        // TODO 查文档 仔细甄别
+        // TODO 需查文档 仔细甄别
         'vue$': 'vue/dist/vue.common.js',
       },
     },
@@ -49,6 +52,7 @@ module.exports = function (env, args) {
       rules: [{
         test: /\.less$/,
         use: [
+          // process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',

@@ -33,3 +33,6 @@ dist/**/*
 
 # Jest Coverage reports
 coverage
+
+# auto generate routes
+schema.js

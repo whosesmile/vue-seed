@@ -4,12 +4,20 @@
       <a class="menu text-gray" @click="back()">
         <i class="icon">&#xe60e;</i>
       </a>
-      <h1 class="title"><b>竹杖芒鞋轻胜马</b></h1>
+      <h1 class="title"><b>首页</b></h1>
     </header>
     <div class="list compact">
       <div class="item-divider">列表注解</div>
-      <router-link class="item tapable" to="/settings" v-for="(item, idx) in list" :key="idx">
-        <div class="text">跳转设置</div>
+      <router-link class="item tapable" to="/account">
+        <div class="text">个人中心</div>
+        <i class="icon text-gray">&#xe61a;</i>
+      </router-link>
+      <router-link class="item tapable" to="/account/orders">
+        <div class="text">我的订单</div>
+        <i class="icon text-gray">&#xe61a;</i>
+      </router-link>
+      <router-link class="item tapable" to="/settings">
+        <div class="text">通用设置</div>
         <i class="icon text-gray">&#xe61a;</i>
       </router-link>
     </div>
@@ -31,11 +39,8 @@ export default {
 </script>
 <style lang="less" module>
 :local(.style) {
-  .item {
+  .demo {
     color: #f00;
-  }
-  .item-divider {
-    color: #0f0;
   }
 }
 </style>
