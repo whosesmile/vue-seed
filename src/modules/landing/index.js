@@ -1,5 +1,5 @@
-import Home from './home';
-import Settings from './settings';
+const Home = () => import(/* webpackChunkName: 'landing' */ './home.vue');
+const Settings = () => import(/* webpackChunkName: 'landing' */ './settings.vue');
 
 const routes = [
   { path: '/', component: Home },

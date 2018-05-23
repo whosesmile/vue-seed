@@ -1,5 +1,5 @@
-import Home from './home';
-import Orders from './orders';
+const Home = () => import(/* webpackChunkName: 'account' */ './home.vue');
+const Orders = () => import(/* webpackChunkName: 'account' */ './orders.vue');
 
 const routes = [
   { path: '/account', component: Home },
