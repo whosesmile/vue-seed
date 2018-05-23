@@ -1,5 +1,5 @@
 <template>
-  <div class="view">
+  <div class="view" :class="$style.style">
     <header class="bar">
       <a class="menu text-gray" @click="back()">
         <i class="icon">&#xe60e;</i>
@@ -29,5 +29,15 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less" module>
+:local(.style) {
+  .item {
+    color: #f00;
+    flex: 1;
+  }
+  .item-divider {
+    color: #0f0;
+  }
+}
 </style>
+
