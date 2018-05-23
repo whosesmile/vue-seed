@@ -8,6 +8,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
+  fallback: true,
   routes: [
     ...routes,
     { path: '*', component: NoMatch },

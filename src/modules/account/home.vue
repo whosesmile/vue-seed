@@ -1,7 +1,7 @@
 <template>
   <div class="view" :class="$style.style">
     <header class="bar">
-      <a class="menu text-gray" @click="back()">
+      <a class="menu text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </a>
       <h1 class="title"><b>我的</b></h1>
@@ -40,11 +40,6 @@ export default {
     return {
       list: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
-  },
-  methods: {
-    back: function() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-    }
   }
 };
 </script>
