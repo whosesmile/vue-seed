@@ -1,8 +1,11 @@
 import './less/index.less';
 import Vue from 'vue';
-import App from './components/app';
+import VueRouter from 'vue-router';
+import routes from './modules/landing';
 
-new Vue({
-  data: { message: 'Hello World' },
-  render: c => c(App),
-}).$mount('#bootstrap');
+Vue.use(VueRouter);
+const router = new VueRouter({
+  routes: routes,
+  mode: 'history',
+});
+new Vue({ router }).$mount('#bootstrap');
