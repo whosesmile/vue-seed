@@ -6,11 +6,13 @@
       </a>
       <h1 class="title"><b>设置</b></h1>
     </header>
-    <div class="list compact">
-      <div class="item-divider">列表注解</div>
-      <div class="item tapable" @click="back()" v-for="(item, idx) in list" :key="idx">
-        <div class="text">返回首页</div>
-        <i class="icon text-gray">&#xe61a;</i>
+    <div class="content">
+      <div class="list compact">
+        <div class="item-divider">列表注解</div>
+        <div class="item tapable" @click="back()" v-for="(item, idx) in list" :key="idx">
+          <div class="text">返回首页</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </div>
       </div>
     </div>
   </div>

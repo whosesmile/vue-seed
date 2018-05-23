@@ -6,7 +6,8 @@
       </a>
       <h1 class="title"><b>我的</b></h1>
     </header>
-    <div class="list">
+
+    <div class="content">
       <div class="list">
         <router-link class="item" to="/account/orders">
           <div class="avatar">
