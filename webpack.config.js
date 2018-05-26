@@ -6,11 +6,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ChunkRenamePlugin = require('webpack-chunk-rename-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // 不带版本 (整合工程到后端,后端提供版本识别;否则使用自带版本命名规则)
-const SCRIPT_FORMAT = '[name].bundle.js';
-const STYLES_FORMAT = '[name].bundle.css';
+const SCRIPT_FORMAT = '[name].[chunkhash].js';
+const STYLES_FORMAT = '[name].[contenthash:20].css';
 
 // 自带版本
 const SCRIPT_CHUNK = '[name].[chunkhash].js';
@@ -19,6 +20,7 @@ const STYLES_CHUNK = '[name].[contenthash:20].css';
 module.exports = function (env, args) {
   return {
     mode: 'development',
+    devtool: 'source-map',
     entry: {
       app: './src/index.js',
     },
@@ -37,22 +39,46 @@ module.exports = function (env, args) {
       },
     },
 
+    optimization: {
+      runtimeChunk: {
+        name: 'manifest',
+      },
+      splitChunks: {
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
+            name: 'vendors',
+          }
+        }
+      },
+    },
+
     plugins: [
       new CleanWebpackPlugin(['dist']), // 多版本共存模式时 必须要取消这个插件
-      new HtmlWebpackPlugin({ title: 'STARTER', template: 'index.html' }),
+      new HtmlWebpackPlugin({ title: 'VUE-SEED', template: 'index.html' }),
       new webpack.ProvidePlugin({ axios: 'axios' }),
       new MiniCssExtractPlugin({
         filename: STYLES_FORMAT,
         chunkFilename: STYLES_CHUNK,
       }),
       new VueLoaderPlugin(),
+      // optimization会导致output.filename失效 所以使用此插件
+      // https://github.com/webpack/webpack/issues/6598
+      new ChunkRenamePlugin({
+        app: SCRIPT_FORMAT,
+        vendors: SCRIPT_FORMAT,
+        manifest: SCRIPT_FORMAT,
+      }),
+      // 以下两个无论开发还是生产都启用 以便充分利用缓存
+      new webpack.NamedChunksPlugin(),
+      new webpack.HashedModuleIdsPlugin({ hashDigestLength: 8 }),
     ],
 
     module: {
       rules: [{
         test: /\.less$/,
         use: [
-          // process.env.NODE_ENV !== 'production' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -71,10 +97,7 @@ module.exports = function (env, args) {
           },
         ],
       }, {
-        test: /\.(jpg|jpeg|gif|png)$/,
-        use: ['file-loader'],
-      }, {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(jpg|jpeg|gif|png|woff|woff2|eot|ttf|otf)$/,
         use: ['file-loader'],
       }, {
         test: /\.vue$/,
@@ -93,8 +116,6 @@ module.exports = function (env, args) {
       }],
     },
 
-    devtool: 'source-map',
-
     devServer: {
       contentBase: './dist',
       port: '3302',
@@ -108,7 +129,5 @@ module.exports = function (env, args) {
         }
       }
     },
-
   };
-
 };

@@ -14,7 +14,6 @@
         <h3 class="title">Oops!</h3>
         <div class="describe">服务器走进了黑森林，没有找到出口...</div>
       </div>
-
       <div class="vspace hspace">
         <a class="button default" @click="reload()">重新加载</a>
       </div>
