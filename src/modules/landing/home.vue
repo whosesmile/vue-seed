@@ -26,15 +26,32 @@
           <i class="icon text-gray">&#xe61a;</i>
         </router-link>
       </div>
+
+      <div class="hspace vspace">
+        <button class="button success" @click="add(2)">Vuex缓存数据:{{count}}, {{double}}</button>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions, mapGetters } = createNamespacedHelpers(
+  "landing/home"
+);
 export default {
   data: function() {
     return {
       list: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
+  },
+
+  computed: {
+    ...mapState(["count"]),
+    ...mapGetters(["double"])
+  },
+
+  methods: {
+    ...mapActions(["add"])
   }
 };
 </script>

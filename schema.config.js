@@ -21,11 +21,23 @@ const list = modules();
 // 代码模板
 let code = list.reduce((str, name) => {
   str += `import ${name} from './modules/${name}';\n`;
+  str += `import ${name}Ducks from './modules/${name}/ducks';\n`;
   return str;
 }, '');
 
+// 整合路由
 code += `
-export default [${list.map(name => `...${name}`).join(', ')}];
+const routes = [${list.map(name => `...${name}`).join(', ')}];
+`;
+
+// 组织Vuex
+code += `
+const modules = { ${list.map(name => `${name}: ${name}Ducks`).join(', ')} };
+`;
+
+// 导出内容
+code += `
+export { routes, modules };
 `;
 
 fs.writeFileSync('./src/schema.js', code, 'utf8');
