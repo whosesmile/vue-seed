@@ -36,10 +36,9 @@
 </template>
 <script>
 export default {
-  data: function() {
-    return {
-      list: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    };
+  data() {
+    const list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    return { list };
   }
 };
 </script>

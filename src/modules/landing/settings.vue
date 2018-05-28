@@ -19,10 +19,9 @@
 </template>
 <script>
 export default {
-  data: function() {
-    return {
-      list: [1, 2]
-    };
+  data() {
+    const list = [1, 2];
+    return { list };
   }
 };
 </script>

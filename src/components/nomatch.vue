@@ -1,7 +1,7 @@
 <template>
   <div class="view" :class="$style.style">
     <header class="bar">
-      <a class="menu text-gray" @click="back()">
+      <a class="menu text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </a>
       <h1 class="title"><b>页面未找到</b></h1>
@@ -23,10 +23,7 @@
 <script>
 export default {
   methods: {
-    back: function() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-    },
-    reload: function() {
+    reload() {
       location.reload();
     }
   }

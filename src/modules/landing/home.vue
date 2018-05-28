@@ -27,6 +27,10 @@
         </router-link>
       </div>
 
+      <div class="list">
+        <div class="item" v-for="(item, idx) in list" :key="idx">{{item.name}}</div>
+      </div>
+
       <div class="hspace vspace">
         <button class="button success" @click="add(2)">Vuex缓存数据:{{count}}, {{double}}</button>
       </div>
@@ -39,10 +43,14 @@ const { mapState, mapActions, mapGetters } = createNamespacedHelpers(
   "landing/home"
 );
 export default {
-  data: function() {
-    return {
-      list: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    };
+  data() {
+    return { list: [] };
+  },
+
+  mounted() {
+    axios.get("/landing/ajax/home", ({ list }) => {
+      this.list = list;
+    });
   },
 
   computed: {
