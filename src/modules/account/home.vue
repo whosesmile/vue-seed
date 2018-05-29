@@ -1,13 +1,12 @@
 <template>
-  <div class="view" :class="$style.style">
-    <header class="bar">
-      <a class="menu text-gray" @click="$router.back()">
+  <ex-view :class="$style.style">
+    <ex-header class="bar">
+      <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
-      </a>
-      <h1 class="title"><b>我的</b></h1>
-    </header>
-
-    <div class="content">
+      </ex-menu>
+      <ex-title title="我的" />
+    </ex-header>
+    <ex-content>
       <div class="list">
         <router-link class="item" to="/account/orders">
           <div class="avatar">
@@ -21,18 +20,20 @@
             <img width="16" src="//img1.qdingnet.com/41a2bbb947f173727de845f70f7c36ab.png" />
           </div>
           <span class="text">收货地址</span>
+          <span class="extra">404演示</span>
           <i class="icon text-gray">&#xe61a;</i>
         </router-link>
         <router-link class="item" to="/account/cart">
           <div class="avatar">
             <img width="16" src="//img1.qdingnet.com/f15e58120c2c48a10ea98680ec7eb1b5.png" />
           </div>
-          <span class="text">我的购物车</span>
+          <span class="text">购物车</span>
+          <span class="extra">404演示</span>
           <i class="icon text-gray">&#xe61a;</i>
         </router-link>
       </div>
-    </div>
-  </div>
+    </ex-content>
+  </ex-view>
 </template>
 <script>
 export default {

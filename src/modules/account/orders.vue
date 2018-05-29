@@ -1,13 +1,12 @@
 <template>
-  <div class="view" :class="$style.style">
-    <header class="bar">
-      <a class="menu text-gray" @click="$router.back()">
+  <ex-view :class="$style.style">
+    <ex-header class="bar">
+      <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
-      </a>
-      <h1 class="title"><b>订单</b></h1>
-    </header>
-
-    <section class="content">
+      </ex-menu>
+      <ex-title title="订单" />
+    </ex-header>
+    <ex-content>
       <div class="list" v-for="(item, idx) in list" :key="idx">
         <a class="item" href="javascript:;">
           <div class="text text-sm">天猫国际</div>
@@ -32,8 +31,8 @@
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </ex-content>
+  </ex-view>
 </template>
 <script>
 export default {

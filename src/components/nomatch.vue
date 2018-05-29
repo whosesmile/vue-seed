@@ -1,12 +1,12 @@
 <template>
-  <div class="view" :class="$style.style">
-    <header class="bar">
-      <a class="menu text-gray" @click="$router.back()">
+  <ex-view :class="$style.style">
+    <ex-header>
+      <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
-      </a>
-      <h1 class="title"><b>页面未找到</b></h1>
-    </header>
-    <div class="section">
+      </ex-menu>
+      <ex-title title="页面未找到" />
+    </ex-header>
+    <ex-content>
       <div class="feedback">
         <div class="mark">
           <img width="197" height="98" src="//img1.qdingnet.com/a93623660fa443e00a6a2fbbf3578635.png" alt="空白" />
@@ -17,8 +17,8 @@
       <div class="vspace hspace">
         <a class="button default" @click="reload()">重新加载</a>
       </div>
-    </div>
-  </div>
+    </ex-content>
+  </ex-view>
 </template>
 <script>
 export default {
@@ -36,3 +36,4 @@ export default {
   }
 }
 </style>
+

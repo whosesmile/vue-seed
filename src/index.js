@@ -10,18 +10,21 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from './ducks';
 import { routes } from './schema';
-import App from './components/app';
-import NoMatch from './components/nomatch';
+import * as lib from './components';
 
 Vue.use(VueRouter);
-Vue.component('app', App);
+
+// 自动注册
+Object.keys(lib).forEach(name => {
+  Vue.component(`ex-${name.toLowerCase()}`, lib[name]);
+});
 
 const router = new VueRouter({
   mode: 'history',
   fallback: true,
   routes: [
     ...routes,
-    { path: '*', component: NoMatch },
+    { path: '*', component: lib.NoMatch },
   ],
 });
 
