@@ -1,10 +1,7 @@
 <template>
   <div class="view" :class="$style.style">
     <header class="bar">
-      <a class="menu text-gray" @click="$router.back()">
-        <i class="icon">&#xe60e;</i>
-      </a>
-      <h1 class="title"><b>首页</b></h1>
+      <h1 class="title"><b>比特商城</b></h1>
     </header>
     <div class="content">
       <template v-if="list.length">
