@@ -65,7 +65,7 @@ export default {
         toast: {
           icon: 'success',
           modal: modal,
-          message: '你好世界'
+          message: modal ? '模态吐司' : '你好世界'
         }
       });
 

@@ -1,28 +1,8 @@
 <template>
-  <ex-mask class="transparent" v-if="modal && show">
-    <div class="toast">
-      <div class="ooxx">
-        <i v-if="is('loading')" class="icon waiting" />
-        <i v-else-if="is('icon')" class="icon" v-html="icon" />
-        <i v-else-if="is('img')" class="icon"><img :src="icon" /></i>
-        <i v-else-if="is('presets')" class="icon" v-html="presets[icon]" />
-        <i v-else class="icon">&#xe601;</i>
-
-        <span class="text" v-if="!is('loading') && message">{{message}}</span>
-      </div>
-    </div>
+  <ex-mask class="transparent" v-if="show && modal">
+    <div class="toast" v-html="fragment()"></div>
   </ex-mask>
-  <div class="toast" v-else-if="!modal && show">
-    <div class="ooxx">
-      <i v-if="is('loading')" class="icon waiting" />
-      <i v-else-if="is('icon')" class="icon" v-html="icon" />
-      <i v-else-if="is('img')" class="icon"><img :src="icon" /></i>
-      <i v-else-if="is('presets')" class="icon" v-html="presets[icon]" />
-      <i v-else class="icon">&#xe601;</i>
-
-      <span class="text" v-if="!is('loading') && message">{{message}}</span>
-    </div>
-  </div>
+  <div class="toast" v-else-if="show && !modal" v-html="fragment()"></div>
 </template>
 
 <script>
@@ -43,19 +23,24 @@ export default {
     };
   },
   methods: {
-    is(type) {
-      switch (type) {
-        case 'loading':
-          return this.icon === 'loading';
-        case 'presets':
-          return this.presets[this.icon];
-        case 'icon':
-          return /^&#\w+;$/.test(this.icon);
-        case 'img':
-          return /^(https?)?\/\//.test(this.icon);
-        default:
-          return false;
+    fragment() {
+      let frag = '';
+      if (this.icon === 'loading') {
+        frag += `<i class="icon waiting"><i>`;
+      } else if (/^&#\w+;$/.test(this.icon)) {
+        frag += `<i class="icon">${this.icon}</i>`;
+      } else if (/^(https?)?\/\//.test(this.icon)) {
+        frag += `<i class="icon"><img src="${this.icon}" /></i>`;
+      } else if (this.presets[this.icon]) {
+        frag += `<i class="icon">${this.presets[this.icon]}</i>`;
+      } else {
+        frag += `<i v-else class="icon">&#xe601;</i>`;
       }
+
+      if (this.message && this.icon !== 'loading') {
+        frag += `<span class="text">${this.message}</span>`;
+      }
+      return `<div class="ooxx">${frag}</div>`;
     }
   }
 };
