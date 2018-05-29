@@ -2,7 +2,7 @@
 const faker = require('faker');
 
 let list = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 3; i++) {
   list.push({
     id: faker.random.number(),
     name: faker.name.jobArea(),
@@ -10,6 +10,6 @@ for (let i = 0; i < 5; i++) {
 }
 
 module.exports = {
-  list,
   code: 200,
+  list: list,
 };

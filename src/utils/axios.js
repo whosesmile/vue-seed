@@ -14,25 +14,42 @@ const caching = (config, data) => {
 
 // 登录弹窗
 const loginRequired = (data) => {
-  store.commit({
+  store.dispatch({
     type: 'showModal',
     modal: {
       title: '温馨提示',
       message: '您需要登录之后才能继续操作',
       buttons: [{
         text: '放弃',
-        onClick: () => {
-          store.commit('hideModal');
+        click: () => {
+          store.dispatch('hideModal');
         },
       }, {
         text: '登录',
-        onClick: () => {
-          // TODO
+        click: () => {
+          store.dispatch('hideModal');
         },
       }],
     },
   });
   return Promise.reject(data);
+};
+
+// 异常处理
+const errorHandler = (message = '参数异常或格式不正确') => {
+  store.dispatch({
+    type: 'showModal',
+    modal: {
+      title: '非常抱歉',
+      message: message,
+      buttons: [{
+        text: '确定',
+        click: () => {
+          store.dispatch('hideModal');
+        },
+      }],
+    },
+  });
 };
 
 axios.defaults.timeout = 20000;
@@ -59,7 +76,7 @@ axios.interceptors.request.use(config => {
     count = Math.max(count, 0);
     count = count + 1;
     if (count === 1) {
-      store.commit({
+      store.dispatch({
         type: 'showToast',
         toast: {
           icon: 'loading',
@@ -70,20 +87,7 @@ axios.interceptors.request.use(config => {
   return config;
 }, (error) => {
   count = -1;
-
-  store.commit({
-    type: 'showModal',
-    modal: {
-      title: '非常抱歉',
-      message: '参数异常或格式不正确',
-      buttons: [{
-        text: '确定',
-        onClick: () => {
-          store.commit('hideModal');
-        },
-      }],
-    },
-  });
+  errorHandler('参数异常或格式不正确');
   return Promise.reject(error);
 });
 
@@ -92,35 +96,26 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
   // 登录拦截
   if (data.code === 403) {
     count = -1;
+    store.dispatch('hideToast');
     return loginRequired(data);
   }
 
-  // 其他
+  // 如果支持全局拦截 则进行统一的异常处理
   if (config.global !== false) {
     count = count - 1;
     if (data.code !== 200) {
       count = -1;
-
-      store.commit({
-        type: 'showModal',
-        modal: {
-          title: '非常抱歉',
-          message: data.message || '服务器繁忙，请稍后再试',
-          buttons: [{
-            text: '确定',
-            onClick: () => store.commit('hideModal'),
-          }],
-        },
-      });
+      errorHandler(data.message || '服务器繁忙，请稍后再试');
     }
     // 仅最后响应触发Action 否则会提前关闭Toast
     else if (count === 0) {
-      store.commit('hideToast');
+      store.dispatch('hideToast');
     }
   }
 
   // 响应失败
   if (data.code !== 200) {
+    store.dispatch('hideToast');
     return Promise.reject(data);
   }
 
@@ -136,23 +131,13 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
   if (axios.isCancel(error)) {
     count = count - 1;
     if (count === 0) {
-      store.commit('hideToast');
+      store.dispatch('hideToast');
     }
   }
   // 其他异常
   else {
     count = -1;
-    store.commit({
-      type: 'showModal',
-      modal: {
-        title: '非常抱歉',
-        message: '网络异常或服务器宕机',
-        buttons: [{
-          text: '确定',
-          onClick: () => store.commit('hideModal'),
-        }],
-      },
-    });
+    errorHandler('网络异常或服务器宕机');
   }
   return Promise.reject(error);
 });

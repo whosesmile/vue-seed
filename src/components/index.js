@@ -5,7 +5,9 @@ import Title from './title';
 import Header from './header';
 import Content from './content';
 import Menu from './menu';
+import Mask from './mask';
 import Toast from './toast';
+import Modal from './modal';
 import Widgets from './widgets';
 
 export {
@@ -16,6 +18,8 @@ export {
   Header,
   Content,
   Menu,
+  Mask,
   Toast,
+  Modal,
   Widgets,
 };
