@@ -23,22 +23,22 @@ export default {
   data() {
     return {
       presets: {
-        success: "&#xe61c;",
-        failure: "&#xe61d;",
-        warning: "&#xe601;"
+        success: '&#xe61c;',
+        failure: '&#xe61d;',
+        warning: '&#xe601;'
       }
     };
   },
   methods: {
     is(type) {
       switch (type) {
-        case "loading":
-          return this.icon === "loading";
-        case "presets":
+        case 'loading':
+          return this.icon === 'loading';
+        case 'presets':
           return this.presets[this.icon];
-        case "icon":
+        case 'icon':
           return /^&#\w+;$/.test(this.icon);
-        case "img":
+        case 'img':
           return /^(https?)?\/\//.test(this.icon);
         default:
           return false;

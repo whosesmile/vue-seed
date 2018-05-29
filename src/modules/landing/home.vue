@@ -40,21 +40,16 @@
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
-const {
-  mapState,
-  mapActions,
-  mapMutations,
-  mapGetters
-} = createNamespacedHelpers("landing/home");
+import { createNamespacedHelpers } from 'vuex';
+const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('landing/home');
 export default {
   computed: {
-    ...mapState(["count", "list"]),
-    ...mapGetters(["double"])
+    ...mapState(['count', 'list']),
+    ...mapGetters(['double'])
   },
   methods: {
-    ...mapActions(["listItems"]),
-    ...mapMutations(["add"])
+    ...mapActions(['listItems']),
+    ...mapMutations(['add'])
   },
   mounted() {
     this.listItems();

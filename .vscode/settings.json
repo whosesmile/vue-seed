@@ -1,0 +1,17 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 9999,
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.maxPreserveNewLines": 1,
+  "html.format.enable": false,
+  "html.format.indentHandlebars": true,
+  "prettier.printWidth": 999,
+  "prettier.proseWrap": "never",
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none"
+}

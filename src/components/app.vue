@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import toast from "./toast";
-import widgets from "./widgets";
-import { mapState } from "vuex";
+import toast from './toast';
+import widgets from './widgets';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      message: "Hello world!"
+      message: 'Hello world!'
     };
   },
   components: {
@@ -22,7 +22,7 @@ export default {
     widgets
   },
   computed: {
-    ...mapState(["toast", "modal"])
+    ...mapState(['toast', 'modal'])
   }
 };
 </script>
