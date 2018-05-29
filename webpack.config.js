@@ -57,7 +57,6 @@ module.exports = function (env, args) {
     plugins: [
       new CleanWebpackPlugin(['dist']), // 多版本共存模式时 必须要取消这个插件
       new HtmlWebpackPlugin({ title: 'VUE-SEED', template: 'index.html' }),
-      new webpack.ProvidePlugin({ axios: 'axios' }),
       new webpack.DefinePlugin({ 'process.env.DEBUG_ENV': JSON.stringify(env) }), // 模拟接口
       new MiniCssExtractPlugin({
         filename: STYLES_FORMAT,
