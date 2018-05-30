@@ -71,7 +71,7 @@ export default {
       this.$store.dispatch({
         type: 'showToast',
         toast: {
-          icon: 'success',
+          icon: 'warning',
           modal: modal,
           message: modal ? '模态吐司' : '你好世界'
         }
@@ -88,7 +88,7 @@ export default {
         type: 'showModal',
         modal: {
           title: '温馨提示',
-          message: '大家好才是真的好',
+          message: '六千年和一瞬间',
           dismiss: () => {
             this.$store.dispatch('hideModal');
           },
