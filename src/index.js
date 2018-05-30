@@ -1,4 +1,4 @@
-// import necessary polyfill
+// import polyfill
 import 'core-js/es6/array';
 import 'core-js/es6/string';
 import 'core-js/es6/promise';

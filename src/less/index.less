@@ -2,6 +2,18 @@ body {
   background-color: #f7f7f7;
 }
 
+// 取消折叠: margin collapse
+section.content {
+  &:before, &:after {
+    content: ' ';
+    display: table;
+  }
+}
+
 .bar .menu {
   cursor: pointer;
+}
+
+.tabbar .item .label {
+  font-weight: 300;
 }

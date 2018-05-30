@@ -4,7 +4,7 @@
       <ex-title title="BITMAIN" />
     </ex-header>
     <ex-content>
-      <div class="list compact overlap" v-if="list.length">
+      <div class="list" v-if="list.length">
         <div class="item-divider">组件演示</div>
         <div class="item" @click="showToast()">
           <div class="text">默认吐司</div>
@@ -45,6 +45,9 @@
         </router-link>
       </div>
     </ex-content>
+    <ex-footer class="btm-fixed">
+      <ex-tabbar @click="tabActived" />
+    </ex-footer>
   </ex-view>
 </template>
 <script>
@@ -58,6 +61,11 @@ export default {
   methods: {
     ...mapActions(['listItems']),
     ...mapMutations(['add']),
+
+    // Tab点击回调
+    tabActived(index) {
+      console.log(`你激活了TabIndex: ${index}`);
+    },
 
     showToast: function(modal = false) {
       this.$store.dispatch({
