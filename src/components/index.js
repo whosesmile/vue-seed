@@ -10,6 +10,7 @@ import Menu from './menu';
 import Mask from './mask';
 import Toast from './toast';
 import Modal from './modal';
+import Sheet from './sheet';
 import Widgets from './widgets';
 
 export {
@@ -25,5 +26,6 @@ export {
   Mask,
   Toast,
   Modal,
+  Sheet,
   Widgets,
 };
