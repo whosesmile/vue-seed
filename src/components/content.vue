@@ -4,7 +4,6 @@
   </section>
 </template>
 <script>
-import { siblings } from '../utils/dom';
 export default {
   data() {
     return {
