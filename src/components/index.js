@@ -12,6 +12,7 @@ import Toast from './toast';
 import Modal from './modal';
 import Sheet from './sheet';
 import Widgets from './widgets';
+import Loader from './loader';
 
 export {
   App,
@@ -28,4 +29,5 @@ export {
   Modal,
   Sheet,
   Widgets,
+  Loader,
 };

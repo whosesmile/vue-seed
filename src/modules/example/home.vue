@@ -27,6 +27,11 @@
           <div class="text">弹出菜单</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
+        <div class="item-divider">Loader</div>
+        <router-link class="item" to="/example/loader">
+          <div class="text">自动加载</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </router-link>
       </div>
     </ex-content>
   </ex-view>
