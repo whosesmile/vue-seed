@@ -21,7 +21,7 @@ export default {
   props: {
     url: { type: String, required: true },
     callback: { type: Function, default: n => n },
-    list: { type: Array, required: true }, // 默认值 比如从vuex中恢复时
+    list: { type: Array, default: () => [] }, // 默认值 比如从vuex中恢复时
     query: { type: Object, default: () => ({}) }, // 查询参数
     size: { type: Number, default: 20 },
     threshold: { type: Number, default: 300 }, // 阈值

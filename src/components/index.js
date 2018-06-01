@@ -13,6 +13,7 @@ import Modal from './modal';
 import Sheet from './sheet';
 import Widgets from './widgets';
 import Loader from './loader';
+import Image from './image';
 
 export {
   App,
@@ -30,4 +31,5 @@ export {
   Sheet,
   Widgets,
   Loader,
+  Image,
 };

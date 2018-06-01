@@ -32,6 +32,11 @@
           <div class="text">自动加载</div>
           <i class="icon text-gray">&#xe61a;</i>
         </router-link>
+        <div class="item-divider">Image</div>
+        <router-link class="item" to="/example/image">
+          <div class="text">延迟载入</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </router-link>
       </div>
     </ex-content>
   </ex-view>
