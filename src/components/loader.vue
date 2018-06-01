@@ -32,13 +32,14 @@ export default {
   data() {
     return {
       page: 0,
-      loading: false
+      loading: false,
+      items: [].concat(this.list) // 防止篡改原引用
     };
   },
   computed: {
     isEnds: function() {
       // 达到极限 显示提示 (首页不展示ends信息)
-      return this.ends && this.page > 1 && this.page * this.size > this.list.length;
+      return this.ends && this.page > 1 && this.page * this.size > this.items.length;
     }
   },
   mounted: function() {
@@ -63,8 +64,8 @@ export default {
     reload() {
       this.page = 0;
       this.loading = false;
-      this.list.splice(0);
-      this.callback({ list: this.list });
+      this.items = [];
+      this.callback({ list: this.items });
       // 重新绑定监听 防止之前被释放 并且会自动加载
       this.listener();
     },
@@ -94,7 +95,7 @@ export default {
       this.release();
       window.addEventListener('scroll', this.handler);
 
-      const count = this.list.length;
+      const count = this.items.length;
       // 如果默认数据为空 自动加载
       if (count === 0) {
         this.loadMore();
@@ -109,7 +110,7 @@ export default {
         return;
       }
       // 如果当前数据小于理论数量 就认为已经没有下一页数据了
-      if (this.page * this.size > this.list.length) {
+      if (this.page * this.size > this.items.length) {
         return;
       }
 
@@ -123,15 +124,14 @@ export default {
         .then(data => {
           this.loading = false;
           this.page = this.page + 1;
-          // TODO: 这不是一个遵循函数式编程的方案 容易引起BUG 只是应用起来会非常简单
-          this.list.splice(this.list.length, 0, ...data.list);
+          this.items = this.items.concat(data.list);
           // 不足一页
           if (data.list.length < this.size) {
             this.release();
           }
 
           // 调用回调
-          this.callback(data);
+          this.callback({ list: this.items });
         })
         .catch(() => {
           this.loading = false;

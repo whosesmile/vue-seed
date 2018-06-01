@@ -15,7 +15,7 @@
           <button class="button sm plain-success" @click="reload()">手动重载</button>
         </div>
       </div>
-      <ex-loader :url="url" :list="list" :query="query" ref="loader">
+      <ex-loader ref="loader" :url="url" :list="list" :query="query" :callback="callback">
         <div class="list compact overlap">
           <div class="item" v-for="(item, idx) in list" :key="idx">
             <div class="text">{{item.name}}</div>
@@ -34,6 +34,7 @@ export default {
     };
   },
   computed: {
+    // PS:如果不想用Vuex，可以直接声明给当前state
     list: function() {
       return this.$store.state.example.loader.list;
     }
@@ -47,6 +48,10 @@ export default {
     },
     reload() {
       this.$refs.loader.reload();
+    },
+    callback({ list }) {
+      // PS:如果不想用Vuex，可以直接赋值给当前state
+      this.$store.dispatch('example/loader/listItems', { type: 'listItems', list: list });
     }
   }
 };

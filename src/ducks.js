@@ -1,15 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { modules } from './schema';
+import dispatch from './utils/dispatch';
 
 Vue.use(Vuex);
-
-// 快捷方式 兼容: store.dispatch
-const dispatch = function (type) {
-  return ({ commit }, payload = {}) => {
-    commit({ type: type, ...payload });
-  };
-};
 
 const store = new Vuex.Store({
   modules: modules,
