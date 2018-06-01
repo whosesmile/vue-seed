@@ -4,7 +4,7 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="延迟载入" />
+      <ex-title title="延迟图片" />
     </ex-header>
     <ex-content>
       <ex-loader url="/example/ajax/list" :callback="callback">
