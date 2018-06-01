@@ -6,6 +6,16 @@ body {
   font-weight: 300;
 }
 
+.popup {
+  .header button {
+    flex: 0;
+    font-size: 16px;
+    &:after {
+      content: none;
+    }
+  }
+}
+
 // 取消折叠: margin collapse
 section.content {
   &:before, &:after {

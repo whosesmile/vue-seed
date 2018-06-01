@@ -22,6 +22,11 @@
           <div class="text">打开弹窗</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
+        <div class="item-divider">Popup</div>
+        <div class="item" @click="showPopup()">
+          <div class="text">打开飘窗</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </div>
         <div class="item-divider">ActionSheet</div>
         <div class="item" @click="showSheet()">
           <div class="text">弹出菜单</div>
@@ -39,11 +44,32 @@
         </router-link>
       </div>
     </ex-content>
+
+    <ex-widgets>
+      <ex-popup :show="popup" :dismiss="hidePopup">
+        <div class="header">
+          <button class="button text-gray" @click="hidePopup">取消</button>
+          <h4 class="title">我是飘窗</h4>
+          <button class="button text-primary" @click="hidePopup">确定</button>
+        </div>
+        <div class="list compact">
+          <div class="item" v-for="item in [1,2,3,4,5]" :key="item" @click="hidePopup">
+            <div class="text">{{item}}: HELLO WORLD</div>
+            <i class="icon text-gray">&#xe61a;</i>
+          </div>
+        </div>
+      </ex-popup>
+    </ex-widgets>
   </ex-view>
 </template>
 <script>
 import axios from 'axios';
 export default {
+  data() {
+    return {
+      popup: false
+    };
+  },
   methods: {
     tipsToast: function(message, modal = false) {
       this.$store.dispatch({
@@ -85,6 +111,15 @@ export default {
         }
       });
     },
+
+    showPopup() {
+      this.popup = true;
+    },
+
+    hidePopup() {
+      this.popup = false;
+    },
+
     showSheet() {
       this.$store.dispatch({
         type: 'showSheet',
