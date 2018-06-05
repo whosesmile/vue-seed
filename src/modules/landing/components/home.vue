@@ -1,9 +1,7 @@
 <template>
   <div :class="$style.style" v-if="list.length">
     <div class="banner">
-      <div class="autofix" style="padding-top:50%;">
-        <img src="//img1.qdingnet.com/cc82fe2ccc29532d3a9217e3f8d39e28.png" />
-      </div>
+      <ex-swipe style="padding-top: 50%;" :list="images"/>
     </div>
 
     <div class="list">
@@ -49,6 +47,18 @@
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('landing/home');
 export default {
+  data() {
+    let images = [];
+    for (let i = 0; i < 5; i++) {
+      images[i] = {
+        src: '//img1.qdingnet.com/c2ed9d5c382fcea698613cc0234c88c9.png',
+        onClick() {
+          console.log('你点击了图片:', i);
+        }
+      };
+    }
+    return { images };
+  },
   computed: {
     ...mapState(['list'])
   },

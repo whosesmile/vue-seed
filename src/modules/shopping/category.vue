@@ -4,14 +4,14 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="商品列表" />
+      <ex-title title="Bitcoin Miners" />
     </ex-header>
     <ex-content>
       <ex-loader url="/example/ajax/list" :list="list" :query="query" :callback="callback">
         <div class="list compact overlap">
-          <router-link class="item" v-for="(item, idx) in list" :key="idx" :to="{path:'shopping', query: {skuId: item.id}}">
+          <router-link class="item" v-for="(item, idx) in list" :key="idx" :to="`/shopping/details/${item.id}`">
             <div class="avatar">
-              <img width="110" height="110" src="//img1.qdingnet.com/d8bc9316e6c081c12692f7d967889e7e.gif" />
+              <img width="110" height="110" :src="`https://placeimg.com/110/110?_=${Math.random()}`" />
             </div>
             <div class="text">
               <h4>{{item.name}}</h4>

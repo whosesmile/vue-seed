@@ -17,6 +17,7 @@ import PickerGroup from './pickergroup';
 import Widgets from './widgets';
 import Loader from './loader';
 import Image from './image';
+import Swipe from './swipe';
 
 export {
   App,
@@ -38,4 +39,5 @@ export {
   Widgets,
   Loader,
   Image,
+  Swipe,
 };
