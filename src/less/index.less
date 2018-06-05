@@ -1,5 +1,11 @@
+@import './keyframes.less';
 body {
   background-color: #f7f7f7;
+  overflow-x: hidden;
+}
+
+.btm-fixed {
+  z-index: 9999;
 }
 
 .text-thin {
@@ -22,4 +28,38 @@ section.content {
     content: ' ';
     display: table;
   }
+}
+
+// 解决错位问题
+.absmix() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+// 左侧进右侧出
+.ex-move-ltr-leave-active {
+  .absmix();
+  z-index: 100;
+  animation: movectl 0.3s ease-out both;
+}
+
+.ex-move-ltr-enter-active {
+  .absmix();
+  z-index: 200;
+  animation: moveltc 0.3s ease-out both;
+}
+
+// 右侧进左侧出
+.ex-move-rtl-leave-active {
+  .absmix();
+  z-index: 100;
+  animation: movectr 0.3s ease-out both;
+}
+
+.ex-move-rtl-enter-active {
+  .absmix();
+  z-index: 200;
+  animation: movertc 0.3s ease-out both;
 }

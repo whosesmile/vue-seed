@@ -1,23 +1,22 @@
 import axios from 'axios';
+import dispatch from '../../../utils/dispatch';
 
 export default {
   namespaced: true,
   state: {
-    count: 1,
+    index: 0,
     list: [],
   },
-  getters: {
-    double: ({ count }) => 2 * count,
-  },
   mutations: {
-    add(state, { count }) {
-      state.count += count;
-    },
     list(state, { list }) {
       state.list = list;
     },
+    setIndex(state, { index }) {
+      state.index = index;
+    }
   },
   actions: {
+    setIndex: dispatch('setIndex'),
     listItems({ commit }, params = { page: 1 }) {
       return axios.get('/landing/ajax/home', {
         params: {
@@ -28,6 +27,6 @@ export default {
         commit({ type: 'list', list: data.list });
         return data;
       });
-    }
+    },
   },
 };

@@ -1,72 +1,101 @@
 <template>
   <ex-view :class="$style.style">
     <ex-header>
-      <ex-title title="BITMAIN" />
+      <ex-menu @click="tipsToast('TODO')">
+        <img width="24" src="//img1.qdingnet.com/bc5f3936ea2d93be4c9de70f9f246fac.png" />
+      </ex-menu>
+      <ex-title :title="title" />
     </ex-header>
     <ex-content>
-      <div class="list" v-if="list.length">
-        <div class="item-divider">组件演示</div>
-        <router-link class="item" to="/example">
-          <div class="text">组件演示</div>
-          <i class="icon text-gray">&#xe61a;</i>
-        </router-link>
-        <div class="item-divider">异步演示</div>
-        <div class="item" v-for="(item, idx) in list" :key="idx">
-          {{idx + 1}}: {{item.name}}
-        </div>
-        <div class="item-divider">全局缓存</div>
-        <div class="item">
-          <div class="text">
-            <button class="button plain-primary" @click="add({count:2})">{{count}} x 2 = {{double}} @Vuex缓存数据</button>
+      <div class="panes">
+        <transition :name="animate">
+          <div class="pane" key="home" v-if="index===0">
+            <ex-landing-home />
           </div>
-        </div>
-
-        <div class="item-divider">跳转演示</div>
-        <router-link class="item" to="/account">
-          <div class="text">个人中心</div>
-          <i class="icon text-gray">&#xe61a;</i>
-        </router-link>
-        <router-link class="item" to="/account/orders">
-          <div class="text">我的订单</div>
-          <i class="icon text-gray">&#xe61a;</i>
-        </router-link>
-        <router-link class="item" to="/settings">
-          <div class="text">通用设置</div>
-          <i class="icon text-gray">&#xe61a;</i>
-        </router-link>
+          <div class="pane" key="category" v-else-if="index===1">
+            <ex-landing-category />
+          </div>
+          <div class="pane" key="cart" v-else-if="index===2">
+            <ex-landing-cart />
+          </div>
+          <div class="pane" key="usercenter" v-else-if="index===3">
+            <ex-landing-usercenter />
+          </div>
+        </transition>
       </div>
     </ex-content>
     <ex-footer class="btm-fixed">
-      <ex-tabbar @click="tabActived" />
+      <ex-tabbar :index="index" @click="tabActived" />
     </ex-footer>
   </ex-view>
 </template>
 <script>
+import Home from './components/home';
+import Category from './components/category';
+import Cart from './components/cart';
+import UserCenter from './components/usercenter';
 import { createNamespacedHelpers } from 'vuex';
-const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('landing/home');
+const { mapState, mapActions } = createNamespacedHelpers('landing/home');
 export default {
-  computed: {
-    ...mapState(['count', 'list']),
-    ...mapGetters(['double'])
+  data() {
+    return {
+      animate: 'ex-move-ltr'
+    };
   },
-  methods: {
-    ...mapActions(['listItems']),
-    ...mapMutations(['add']),
-
-    // Tab点击回调
-    tabActived(index) {
-      console.log(`你激活了TabIndex: ${index}`);
+  components: {
+    'ex-landing-home': Home,
+    'ex-landing-category': Category,
+    'ex-landing-cart': Cart,
+    'ex-landing-usercenter': UserCenter
+  },
+  computed: {
+    ...mapState(['index']),
+    title: function() {
+      switch (this.index) {
+        case 0:
+          return 'BITMAIN';
+        case 1:
+          return 'Category';
+        case 2:
+          return 'Cart';
+        case 3:
+          return 'Usercenter';
+      }
     }
   },
-  mounted() {
-    this.listItems();
+  methods: {
+    ...mapActions(['setIndex']),
+    tabActived(index) {
+      if (index >= this.index) {
+        this.animate = 'ex-move-ltr';
+        this.setIndex({ index });
+      } else {
+        this.animate = 'ex-move-rtl';
+        this.setIndex({ index });
+      }
+    },
+    tipsToast: function(message, modal = false) {
+      this.$store.dispatch({
+        type: 'tipsToast',
+        toast: {
+          icon: 'warning',
+          modal: modal,
+          message: message
+        }
+      });
+    }
   }
 };
 </script>
 <style lang="less" module>
 :local(.style) {
-  .demo {
-    color: #f00;
+  .panes {
+    position: relative;
+    width: 100%;
+
+    .pane {
+      transform: translate3d(0, 0, 0);
+    }
   }
 }
 </style>
