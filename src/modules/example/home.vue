@@ -19,17 +19,22 @@
         </div>
         <div class="item-divider">Modal</div>
         <div class="item" @click="showModal()">
-          <div class="text">打开弹窗</div>
+          <div class="text">对话框</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
         <div class="item-divider">Popup</div>
         <div class="item" @click="showPopup()">
-          <div class="text">打开飘窗</div>
+          <div class="text">上浮窗</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </div>
+        <div class="item-divider">Picker</div>
+        <div class="item" @click="showPicker()">
+          <div class="text">选择器</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
         <div class="item-divider">ActionSheet</div>
         <div class="item" @click="showSheet()">
-          <div class="text">弹出菜单</div>
+          <div class="text">弹出式菜单</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
         <div class="item-divider">Loader</div>
@@ -48,17 +53,18 @@
     <ex-widgets>
       <ex-popup :show="popup" :dismiss="hidePopup">
         <div class="header">
-          <button class="button text-gray" @click="hidePopup">取消</button>
           <h4 class="title">我是飘窗</h4>
-          <button class="button text-primary" @click="hidePopup">确定</button>
+          <!-- <button class="button text-primary" @click="hidePopup">确定</button> -->
         </div>
         <div class="list compact">
           <div class="item" v-for="item in [1,2,3,4,5]" :key="item" @click="hidePopup">
-            <div class="text">{{item}}: HELLO WORLD</div>
+            <div class="text">北京欢迎你</div>
             <i class="icon text-gray">&#xe61a;</i>
           </div>
         </div>
       </ex-popup>
+
+      <ex-picker v-bind="picker" />
     </ex-widgets>
   </ex-view>
 </template>
@@ -67,7 +73,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      popup: false
+      popup: false,
+      picker: { show: false }
     };
   },
   methods: {
@@ -112,14 +119,6 @@ export default {
       });
     },
 
-    showPopup() {
-      this.popup = true;
-    },
-
-    hidePopup() {
-      this.popup = false;
-    },
-
     showSheet() {
       this.$store.dispatch({
         type: 'showSheet',
@@ -160,6 +159,59 @@ export default {
           ]
         }
       });
+    },
+
+    showPopup() {
+      this.popup = true;
+    },
+
+    hidePopup() {
+      this.popup = false;
+    },
+
+    showPicker() {
+      this.picker = {
+        show: true,
+        adjust: false,
+        title: '选择城市',
+        groups: [[{ name: '北京' }, { name: '上海', disabled: true }, { name: '广州' }, { name: '深圳' }, { name: '杭州' }, { name: '南京', disabled: true }]],
+        checked: this.checked,
+        dismiss: () => {
+          this.picker.show = false;
+        },
+        // 变动处理: 返回联动列数据
+        // 也可以返回Promise 以便处理异步 resolve的数据作为联动列数据
+        // params:
+        // index: 选中索引
+        // group: 变动数组
+        onChange: ({ index, group }) => {
+          let data = null;
+          let item = group[index];
+          if (item.name === '北京') {
+            data = [{ name: '东城' }, { name: '西城' }, { name: '海淀' }, { name: '朝阳', disabled: true }, { name: '西城' }];
+          } else if (item.name === '上海') {
+            data = [{ name: '徐汇' }, { name: '朝阳' }];
+          } else if (item.name === '广州') {
+            data = [{ name: '沙坝' }, { name: '天河' }];
+          } else if (item.name === '深圳') {
+            data = [{ name: '福田' }, { name: '盐田' }];
+          } else if (item.name === '杭州') {
+            data = [{ name: '萧山' }, { name: '西湖' }];
+          } else if (item.name === '南京') {
+            data = [{ name: '白下' }, { name: '玄武' }];
+          }
+          return data;
+        },
+        onCancel: () => {
+          this.picker.show = false;
+        },
+        onConfirm: ({ list, checked }) => {
+          // 更新选中索引 便于下次打开恢复上次选择
+          this.checked = checked;
+          this.picker.show = false;
+          console.log('你选择了:', list.map(item => item.name).join(''));
+        }
+      };
     }
   }
 };

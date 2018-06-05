@@ -1,6 +1,6 @@
 <template>
   <transition name="ex-widget" @enter="enter">
-    <ex-mask @click="dismiss($event)" v-if="show">
+    <ex-mask v-if="show" @click="dismiss($event)">
       <div class="modal">
         <h3 class="title" v-if="title">{{title}}</h3>
         <div class="content" v-html="message"></div>

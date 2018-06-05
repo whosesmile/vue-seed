@@ -12,6 +12,8 @@ import Toast from './toast';
 import Modal from './modal';
 import Popup from './popup';
 import Sheet from './sheet';
+import Picker from './picker';
+import PickerGroup from './pickergroup';
 import Widgets from './widgets';
 import Loader from './loader';
 import Image from './image';
@@ -31,6 +33,8 @@ export {
   Modal,
   Popup,
   Sheet,
+  Picker,
+  PickerGroup,
   Widgets,
   Loader,
   Image,

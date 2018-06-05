@@ -14,9 +14,13 @@ import * as lib from './components';
 
 Vue.use(VueRouter);
 
+// 工具方法
+// AbCdEf => ab-cd-ef
+const kebabCase = str => str.replace(/([A-Z])/g, s => '-' + s.toLowerCase()).replace(/^-/, '');
+
 // 自动注册
 Object.keys(lib).forEach(name => {
-  Vue.component(`ex-${name.toLowerCase()}`, lib[name]);
+  Vue.component(`ex-${kebabCase(name)}`, lib[name]);
 });
 
 const router = new VueRouter({
