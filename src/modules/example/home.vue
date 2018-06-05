@@ -102,14 +102,14 @@ export default {
           buttons: [
             {
               text: '取消',
-              click: () => {
+              onClick: () => {
                 console.log('你点击了取消');
                 this.$store.dispatch('hideModal');
               }
             },
             {
               text: '确定',
-              click: () => {
+              onClick: () => {
                 console.log('你点击了确定');
                 this.$store.dispatch('hideModal');
               }
@@ -134,7 +134,7 @@ export default {
               {
                 text: '删除',
                 class: 'text-warning',
-                click: () => {
+                onClick: () => {
                   console.log('你点击了删除');
                   this.$store.dispatch('hideSheet');
                   axios.get('/landing/ajax/home').then(() => {
@@ -150,7 +150,7 @@ export default {
               {
                 text: '放弃',
                 class: 'text-gray',
-                click: () => {
+                onClick: () => {
                   console.log('你点击了放弃');
                   this.$store.dispatch('hideSheet');
                 }

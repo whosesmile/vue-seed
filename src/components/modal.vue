@@ -6,7 +6,7 @@
         <div class="content" v-html="message"></div>
         <footer class="footer">
           <div class="button-group compact nesting">
-            <button class="button square" v-for="(item, idx) in buttons" :key="idx" :class="[item.class || 'text-primary']" @click="item.click($event)">{{item.text}}</button>
+            <button class="button square" v-for="(item, idx) in buttons" :key="idx" :class="[item.class || 'text-primary']" @click="item.onClick">{{item.text}}</button>
           </div>
         </footer>
       </div>

@@ -7,7 +7,7 @@
           <span>{{message}}</span>
         </header>
         <div class="menus" v-for="(group, idx) in list" :key="idx">
-          <div class="item" v-for="(item, idx) in group" :key="idx" :class="[item.class]" @click="item.click($event)">{{item.text}}</div>
+          <div class="item" v-for="(item, idx) in group" :key="idx" :class="[item.class]" @click="item.onClick">{{item.text}}</div>
         </div>
       </div>
     </ex-mask>
