@@ -11,7 +11,7 @@
         <div class="list compact overlap">
           <router-link class="item" v-for="(item, idx) in list" :key="idx" :to="`/shopping/details/${item.id}`">
             <div class="avatar">
-              <img width="110" height="110" :src="`https://placeimg.com/110/110?_=${Math.random()}`" />
+              <ex-image width="110" height="110" :src="`https://placeimg.com/110/110?_=${Math.random()}`" />
             </div>
             <div class="text">
               <h4>{{item.name}}</h4>

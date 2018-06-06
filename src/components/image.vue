@@ -1,5 +1,5 @@
 <template>
-  <img ref="image" :src="mark" />
+  <img ref="image" :src="source" :class="clazz" />
 </template>
 <script>
 import offset from '../utils/offset';
@@ -7,6 +7,21 @@ export default {
   props: {
     src: { type: String, required: true },
     mark: { type: String, default: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' }
+  },
+  data() {
+    return {
+      loading: true,
+      animated: false,
+      source: this.mark
+    };
+  },
+  computed: {
+    clazz() {
+      if (this.animated) {
+        return null;
+      }
+      return this.loading ? this.$style.loading : this.$style.fadeIn;
+    }
   },
   mounted() {
     // TODO: 每个元素都绑定时间 效率比较低 考虑批量处理
@@ -41,11 +56,30 @@ export default {
         // 图片需要刚好落在视口范围内(这里有个假定是图片不会比容器的可视高度还高)
         // 图片上沿 <= 滚动距离 + 容器可视高度 + 阈值 && 图片下沿 >= 滚动距离 - 阈值
         if (ET <= ST + CH + TH && EB >= ST - TH) {
-          image.setAttribute('src', this.src);
+          // 先清理监听
           this.release();
+
+          let preload = new Image();
+          preload.onload = () => {
+            this.source = this.src;
+            this.loading = false;
+            // 定义复用timer
+            this.timer = setTimeout(() => {
+              this.animated = true;
+            }, 300);
+          };
+          preload.src = this.src;
         }
       });
     }
   }
 };
 </script>
+<style lang="less" module>
+:local(.loading) {
+  opacity: 0;
+}
+:local(.fadeIn) {
+  transition: opacity 0.3s ease-out;
+}
+</style>
