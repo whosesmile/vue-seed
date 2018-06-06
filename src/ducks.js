@@ -27,7 +27,7 @@ const store = new Vuex.Store({
       clearTimeout(this.toastTimer);
       this.toastTimer = setTimeout(() => {
         store.dispatch('hideToast');
-      }, 3000);
+      }, toast.mills || 3000);
     },
     showModal(state, { modal }) {
       state.modal = { ...modal, show: true };
