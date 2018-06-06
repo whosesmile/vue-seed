@@ -1,6 +1,6 @@
 <template>
   <ex-view :class="$style.style">
-    <ex-header>
+    <ex-header class="top-fixed">
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>

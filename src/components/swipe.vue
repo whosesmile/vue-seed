@@ -187,15 +187,15 @@ export default {
     line-height: normal;
     .item {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       margin: 0 3px;
       border-radius: 100%;
       background-color: #d8d8d8;
       transition-property: background-color;
       transition-duration: 0.3s;
       &.active {
-        background-color: #a1a1a1;
+        background-color: #529bd7;
       }
     }
   }

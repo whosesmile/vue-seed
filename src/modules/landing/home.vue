@@ -1,6 +1,6 @@
 <template>
   <ex-view :class="$style.style">
-    <ex-header>
+    <ex-header class="top-fixed">
       <ex-menu @click="tipsToast('TODO')">
         <img width="24" src="//img1.qdingnet.com/bc5f3936ea2d93be4c9de70f9f246fac.png" />
       </ex-menu>
