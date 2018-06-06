@@ -9,11 +9,15 @@
     <ex-content>
       <div class="list compact overlap">
         <div class="item-divider">Toast</div>
-        <div class="item" @click="tipsToast('默认吐司')">
-          <div class="text">默认吐司</div>
+        <div class="item" @click="tipsToast({message: '我是文本提示，建议不超过15个字！'})">
+          <div class="text">文本提示</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
-        <div class="item" @click="tipsToast('模态吐司', true)">
+        <div class="item" @click="tipsToast({icon: 'success', message: '标准吐司'})">
+          <div class="text">标准吐司</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </div>
+        <div class="item" @click="tipsToast({icon: 'failure', message: '模态吐司', modal: true})">
           <div class="text">模态吐司</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
@@ -78,17 +82,12 @@ export default {
     };
   },
   methods: {
-    tipsToast: function(message, modal = false) {
+    tipsToast: function(toast) {
       this.$store.dispatch({
         type: 'tipsToast',
-        toast: {
-          icon: 'warning',
-          modal: modal,
-          message: message
-        }
+        toast: toast
       });
     },
-
     showModal: function() {
       this.$store.dispatch({
         type: 'showModal',
