@@ -6,6 +6,7 @@ import offset from '../utils/offset';
 export default {
   props: {
     src: { type: String, required: true },
+    fade: { type: Boolean, default: true },
     mark: { type: String, default: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' }
   },
   data() {
@@ -17,6 +18,9 @@ export default {
   },
   computed: {
     clazz() {
+      if (!this.fade) {
+        return null;
+      }
       if (this.animated) {
         return null;
       }
@@ -59,16 +63,22 @@ export default {
           // 先清理监听
           this.release();
 
-          let preload = new Image();
-          preload.onload = () => {
+          // 立即切换
+          if (!this.fade) {
             this.source = this.src;
-            this.loading = false;
-            // 定义复用timer
-            this.timer = setTimeout(() => {
-              this.animated = true;
-            }, 300);
-          };
-          preload.src = this.src;
+          } else {
+            // 渐显动画
+            let preload = new Image();
+            preload.onload = () => {
+              this.source = this.src;
+              this.loading = false;
+              // 定义复用timer
+              this.timer = setTimeout(() => {
+                this.animated = true;
+              }, 300);
+            };
+            preload.src = this.src;
+          }
         }
       });
     }

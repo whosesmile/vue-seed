@@ -121,7 +121,7 @@ export default {
           global: false, // 不触发全局事件(Toast提示)
           cancelToken: new axios.CancelToken(cancel => (this.cancel = cancel))
         })
-        .then(data => {
+        .then(({ data }) => {
           this.loading = false;
           this.page = this.page + 1;
           this.items = this.items.concat(data.list);

@@ -4,18 +4,18 @@
       <ex-swipe style="padding-top: 50%;" :list="images"/>
     </div>
 
-    <div class="list" v-for="item in [0,1,2,3,4,5,6,7,8,9]" :key="item">
+    <div class="list" v-for="items in list" :key="items.text">
       <div class="item">
-        <div class="text">SHA256/Bitcoin Miners</div>
-        <router-link class="text-sm link" :to="`/product/category/${123}`">More</router-link>
+        <div class="text">{{items.text}}</div>
+        <router-link class="text-sm link" :to="`/product/category/${encodeURI(items.text)}`">More</router-link>
       </div>
-      <router-link class="item" v-for="(item, idx) in list" :key="idx" :to="`/product/details/${item.id}`">
+      <router-link class="item" v-for="(item, idx) in items.subList.slice(0,2)" :key="idx" :to="`/product/details/${item.productId}`">
         <div class="avatar">
-          <ex-image width="120" height="95" src="//img1.qdingnet.com/ee328e05e71d2cd17797526c514a79c5.png" />
+          <img width="120" height="95" :src="item.img" />
         </div>
         <div class="text">
           <h4>{{item.name}}</h4>
-          <div class="brief" ui-mode="2">Shipping within 10 working days after full payment. Shipping within 10 working days after full payment.</div>
+          <div class="brief" ui-mode="2">{{item.description}}</div>
           <div class="price text-primary">${{item.price}}</div>
         </div>
       </router-link>
@@ -34,17 +34,7 @@ export default {
     ...mapState(['list'])
   },
   methods: {
-    ...mapActions(['listItems']),
-    tipsToast: function(message, modal = false) {
-      this.$store.dispatch({
-        type: 'tipsToast',
-        toast: {
-          icon: 'warning',
-          modal: modal,
-          message: message
-        }
-      });
-    }
+    ...mapActions(['listItems'])
   },
   mounted() {
     this.listItems();

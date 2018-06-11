@@ -86,6 +86,10 @@ axios.interceptors.request.use(config => {
 
 // Add response interceptor
 axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
+  // code
+  if (/^\d+$/.test(data.code)) {
+    data.code = Number(data.code);
+  }
   // 登录拦截
   if (data.code === 403) {
     count = -1;
@@ -96,7 +100,7 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
   // 如果支持全局拦截 则进行统一的异常处理
   if (config.global !== false) {
     count = count - 1;
-    if (data.code !== 200) {
+    if (data.code !== 0) {
       count = -1;
       store.dispatch('hideToast');
       errorHandler(data.message || '服务器繁忙，请稍后再试');
@@ -108,7 +112,7 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
   }
 
   // 响应失败
-  if (data.code !== 200) {
+  if (data.code !== 0) {
     store.dispatch('hideToast');
     return Promise.reject(data);
   }

@@ -4,8 +4,11 @@ import dispatch from '../../../utils/dispatch';
 export default {
   namespaced: true,
   state: {
+    // home
     index: 0,
     list: [],
+    // category
+    category: 'all',
   },
   mutations: {
     list(state, { list }) {
@@ -13,9 +16,13 @@ export default {
     },
     setIndex(state, { index }) {
       state.index = index;
+    },
+    setCategory(state, { category }) {
+      state.category = category;
     }
   },
   actions: {
+    // home
     setIndex: dispatch('setIndex'),
     listItems({ commit }, params = { page: 1 }) {
       return axios.get('/api/landing/home', {
@@ -23,10 +30,12 @@ export default {
           page: params.page,
         },
         cache: true,
-      }).then((data) => {
-        commit({ type: 'list', list: data.list });
+      }).then(({ data }) => {
+        commit({ type: 'list', list: data });
         return data;
       });
     },
+    // category
+    setCategory: dispatch('setCategory'),
   },
 };

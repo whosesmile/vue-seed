@@ -12,6 +12,6 @@ for (let i = 0; i < 20; i++) {
 }
 
 module.exports = {
-  code: 200,
-  list: list,
+  code: 0,
+  data: { list }
 };
