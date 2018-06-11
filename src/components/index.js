@@ -18,6 +18,7 @@ import Widgets from './widgets';
 import Loader from './loader';
 import Image from './image';
 import Swipe from './swipe';
+import Stepper from './stepper';
 
 export {
   App,
@@ -40,4 +41,5 @@ export {
   Loader,
   Image,
   Swipe,
+  Stepper,
 };

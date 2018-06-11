@@ -51,6 +51,11 @@
           <div class="text">延迟图片</div>
           <i class="icon text-gray">&#xe61a;</i>
         </router-link>
+        <div class="item-divider">Stepper</div>
+        <div class="item" @click="showStepper()">
+          <div class="text">步进器</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </div>
       </div>
     </ex-content>
 
@@ -68,6 +73,18 @@
         </div>
       </ex-popup>
 
+      <ex-popup :show="stepper" :dismiss="hideStepper">
+        <div class="header">
+          <button class="button text-primary" @click="hideStepper">取消</button>
+          <button class="button text-primary" @click="hideStepper">确定</button>
+        </div>
+        <div class="content">
+          <div class="vspace hspace">
+            <ex-stepper v-model="count" :min="5" :max="10" :step="3" />
+          </div>
+        </div>
+      </ex-popup>
+
       <ex-picker v-bind="picker" />
     </ex-widgets>
   </ex-view>
@@ -77,9 +94,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      count: 11,
       popup: false,
-      picker: { show: false }
+      picker: { show: false },
+      stepper: false
     };
+  },
+  watch: {
+    count() {
+      console.log(this.count);
+    }
   },
   methods: {
     tipsToast: function(toast) {
@@ -166,6 +190,14 @@ export default {
 
     hidePopup() {
       this.popup = false;
+    },
+
+    showStepper() {
+      this.stepper = true;
+    },
+
+    hideStepper() {
+      this.stepper = false;
     },
 
     showPicker() {
