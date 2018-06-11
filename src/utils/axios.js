@@ -7,8 +7,7 @@ const cache = new Cache(20);
 
 // Create intercepting get function which returns cached promise,
 const caching = (config, data) => {
-  let url = config.url.replace(/^\/mock/, '');
-  let key = url + '?' + JSON.stringify(config.params || {});
+  let key = config.url + '?' + JSON.stringify(config.params || {});
   cache.set(key, data);
 };
 
@@ -44,7 +43,7 @@ const errorHandler = (message = '参数异常或格式不正确') => {
       message: message,
       buttons: [{
         text: '确定',
-        click: () => {
+        onClick: () => {
           store.dispatch('hideModal');
         },
       }],
@@ -62,12 +61,6 @@ let count = 0;
 
 // Add request interceptor
 axios.interceptors.request.use(config => {
-  // 测试环境的MOCK接口
-  if (process.env.DEBUG_ENV === 'simulation') {
-    if (!/^(?:\w+:)\/\//.test(config.url)) {
-      config.url = '/mock' + config.url;
-    }
-  }
   // 仅首个请求触发Action 重复触发无意义
   if (config.global !== false) {
     // 如果上次请求有异常 重置count (异常发生时 count会被设置为-1)
@@ -105,6 +98,7 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
     count = count - 1;
     if (data.code !== 200) {
       count = -1;
+      store.dispatch('hideToast');
       errorHandler(data.message || '服务器繁忙，请稍后再试');
     }
     // 仅最后响应触发Action 否则会提前关闭Toast
@@ -137,6 +131,7 @@ axios.interceptors.response.use(({ config, data = { code: 500 } }) => {
   // 其他异常
   else {
     count = -1;
+    store.dispatch('hideToast');
     errorHandler('网络异常或服务器宕机');
   }
   return Promise.reject(error);

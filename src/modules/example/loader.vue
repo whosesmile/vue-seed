@@ -29,7 +29,7 @@
 export default {
   data() {
     return {
-      url: '/example/ajax/list',
+      url: '/api/example/list',
       query: {}
     };
   },

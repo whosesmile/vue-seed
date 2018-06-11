@@ -4,7 +4,7 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="页面未找到" />
+      <ex-title title="ERROR" />
     </ex-header>
     <ex-content>
       <div class="feedback">
@@ -12,10 +12,10 @@
           <img width="197" height="98" src="//img1.qdingnet.com/a93623660fa443e00a6a2fbbf3578635.png" alt="空白" />
         </div>
         <h3 class="title">Oops!</h3>
-        <div class="describe">服务器走进了黑森林，没有找到出口...</div>
+        <div class="describe">HMMM, SOMETHING IS NOT RIGHT?</div>
       </div>
       <div class="vspace hspace">
-        <a class="button default" @click="reload()">重新加载</a>
+        <a class="button default" @click="reload()">RETRY</a>
       </div>
     </ex-content>
   </ex-view>

@@ -45,3 +45,13 @@ section.content {
   z-index: 200;
   animation: movertc 0.3s ease-out both;
 }
+
+// 两行文本
+.list > .item > .text > .brief {
+  &[ui-mode="2"] {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}

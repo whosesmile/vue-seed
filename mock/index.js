@@ -18,7 +18,7 @@ app.use(async (ctx, next) => {
 
 // 模拟延迟
 app.use(async (ctx, next) => {
-  let match = ctx.path.match(/\/delay\/ajax\/(\d+)/);
+  let match = ctx.path.match(/\/delay\/(\d+)/);
   if (match && match[1]) {
 
     ctx.body = await new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ app.use(async (ctx, next) => {
 
 // 模拟生产环境，接口延迟一定时间再返回
 app.use(async (ctx, next) => {
-  let file = ctx.path.replace(/^\/(\w+)\/ajax(.*)/, './$1$2');
+  let file = ctx.path.replace(/^\/(\w+)(.*)/, './$1$2');
   delete require.cache[require.resolve(file)];
 
   ctx.body = await new Promise((resolve, reject) => {

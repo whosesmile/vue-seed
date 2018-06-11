@@ -160,7 +160,7 @@ export default {
                 onClick: () => {
                   console.log('你点击了删除');
                   this.$store.dispatch('hideSheet');
-                  axios.get('/landing/ajax/home').then(() => {
+                  axios.get('/api/landing/home').then(() => {
                     this.$store.dispatch({
                       type: 'tipsToast',
                       toast: { icon: 'success', message: '删除成功' }

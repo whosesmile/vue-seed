@@ -123,9 +123,9 @@ module.exports = function (env, args) {
       disableHostCheck: true,
       historyApiFallback: true,
       proxy: {
-        '/mock': {
+        '/api': {
           target: 'http://localhost:3000',
-          pathRewrite: { '^/mock': '' },
+          pathRewrite: { '^/api': '' },
         }
       }
     },

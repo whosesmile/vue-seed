@@ -18,7 +18,7 @@ export default {
   actions: {
     setIndex: dispatch('setIndex'),
     listItems({ commit }, params = { page: 1 }) {
-      return axios.get('/landing/ajax/home', {
+      return axios.get('/api/landing/home', {
         params: {
           page: params.page,
         },

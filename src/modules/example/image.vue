@@ -7,7 +7,7 @@
       <ex-title title="延迟图片" />
     </ex-header>
     <ex-content>
-      <ex-loader url="/example/ajax/list" :callback="callback">
+      <ex-loader url="/api/example/list" :callback="callback">
         <div class="list compact overlap">
           <div class="item" v-for="(item, idx) in list" :key="idx" ui-mode="15px">
             <div class="avatar">

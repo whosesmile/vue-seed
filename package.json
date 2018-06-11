@@ -4,7 +4,7 @@
   "description": "Vue Example",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --env simulation",
+    "start": "webpack-dev-server --open",
     "watch": "webpack --watch",
     "build": "yarn install && webpack --mode production",
     "once": "webpack",
