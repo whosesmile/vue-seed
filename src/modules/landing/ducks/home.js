@@ -24,11 +24,9 @@ export default {
   actions: {
     // home
     setIndex: dispatch('setIndex'),
-    listItems({ commit }, params = { page: 1 }) {
+    listItems({ commit }, params = {}) {
       return axios.get('/api/landing/home', {
-        params: {
-          page: params.page,
-        },
+        params: params,
         cache: true,
       }).then(({ data }) => {
         commit({ type: 'list', list: data });

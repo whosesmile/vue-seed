@@ -1,15 +1,24 @@
-import dispatch from '../../../utils/dispatch';
+import axios from 'axios';
+
 export default {
   namespaced: true,
   state: {
     list: [],
   },
   mutations: {
-    listItems(state, { list }) {
+    list(state, { list }) {
       state.list = list;
     },
   },
   actions: {
-    listItems: dispatch('listItems'),
+    listItems({ commit }, params = {}) {
+      return axios.get('/api/landing/home', {
+        params: params,
+        cache: true,
+      }).then(({ data }) => {
+        commit({ type: 'list', list: data });
+        return data;
+      });
+    },
   },
 };

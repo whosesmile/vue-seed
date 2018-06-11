@@ -32,4 +32,21 @@ const router = new VueRouter({
   ],
 });
 
+// 首页特殊处理
+router.beforeEach((to, from, next) => {
+  const index = ['/', '/category', '/cart', '/usercenter'].indexOf(to.path);
+  if (index !== -1) {
+    store.commit({
+      type: 'landing/home/setIndex',
+      index: index,
+    });
+
+    store.dispatch('landing/home/setIndex', {
+      index: index,
+    });
+  }
+  next();
+});
+
+
 new Vue({ store, router }).$mount('#bootstrap');

@@ -6,7 +6,7 @@ import offset from '../utils/offset';
 export default {
   props: {
     src: { type: String, required: true },
-    fade: { type: Boolean, default: true },
+    fade: { type: Boolean, default: false },
     mark: { type: String, default: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' }
   },
   data() {

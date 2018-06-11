@@ -73,6 +73,10 @@ export default {
         this.animate = 'ex-move-rtl';
         this.setIndex({ index });
       }
+      // 替换路由 这样刷新也可以保持
+      // 也可以保证分享也可以落到正确的TAB上
+      const pathes = ['/', '/category', '/cart', '/usercenter'];
+      this.$router.replace(pathes[index]);
     },
     tipsToast: function(message, modal = false) {
       this.$store.dispatch({

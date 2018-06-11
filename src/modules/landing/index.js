@@ -1,9 +1,7 @@
 const Home = () => import(/* webpackChunkName: 'landing' */ './home');
-const Settings = () => import(/* webpackChunkName: 'landing' */ './settings');
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/settings', component: Settings },
+  { path: '/(category|cart|usercenter)?', component: Home },
 ];
 
 export default routes;

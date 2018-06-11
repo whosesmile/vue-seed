@@ -4,44 +4,45 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="Bitcoin Miners" />
+      <ex-title :title="title" />
     </ex-header>
     <ex-content>
-      <ex-loader url="/api/example/list" :list="list" :query="query" :callback="callback">
-        <div class="list compact overlap">
-          <router-link class="item" v-for="(item, idx) in list" :key="idx" :to="`/product/details/${item.id}`">
-            <div class="avatar">
-              <ex-image width="120" height="95" src="//img1.qdingnet.com/a3afb7ca236e6cc072ab19bfbfa8d6cf.png" />
-            </div>
-            <div class="text">
-              <h4>{{item.name}}</h4>
-              <div class="brief" ui-mode="2">Shipping within 10 working days after full payment.</div>
-              <div class="price text-primary">${{item.price}}</div>
-            </div>
-          </router-link>
-        </div>
-      </ex-loader>
+      <div class="list compact overlap">
+        <router-link class="item" v-for="(item, idx) in items" :key="idx" :to="`/product/details/${item.id}`">
+          <div class="avatar">
+            <img width="120" height="95" :src="item.img" />
+          </div>
+          <div class="text">
+            <h4>{{item.name}}</h4>
+            <div class="brief" ui-mode="2">{{item.description}}</div>
+            <div class="price text-primary">${{item.price}}</div>
+          </div>
+        </router-link>
+      </div>
     </ex-content>
   </ex-view>
 </template>
 <script>
+import { createNamespacedHelpers } from 'vuex';
+const { mapState, mapActions } = createNamespacedHelpers('product/category');
 export default {
   data() {
     return {
-      query: { id: this.$route.params.id }
+      title: this.$route.query.type
     };
   },
   computed: {
-    // PS:如果不想用Vuex，可以直接声明给当前state
-    list: function() {
-      return this.$store.state.product.category.list;
+    ...mapState(['list']),
+    items() {
+      const list = this.list.find(item => item.text === this.title);
+      return list ? list.subList : [];
     }
   },
   methods: {
-    callback({ list }) {
-      // PS:如果不想用Vuex，可以直接赋值给当前state
-      this.$store.dispatch('product/category/listItems', { type: 'listItems', list: list });
-    }
+    ...mapActions(['listItems'])
+  },
+  mounted() {
+    this.listItems();
   }
 };
 </script>

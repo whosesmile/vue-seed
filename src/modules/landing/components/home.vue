@@ -7,7 +7,7 @@
     <div class="list" v-for="items in list" :key="items.text">
       <div class="item">
         <div class="text">{{items.text}}</div>
-        <router-link class="text-sm link" :to="`/product/category/${encodeURI(items.text)}`">More</router-link>
+        <router-link class="text-sm link" :to="{path:'/product/category', query:{type: items.text}}">More</router-link>
       </div>
       <router-link class="item" v-for="(item, idx) in items.subList.slice(0,2)" :key="idx" :to="`/product/details/${item.productId}`">
         <div class="avatar">
@@ -41,7 +41,6 @@ export default {
   }
 };
 </script>
-
 <style lang="less" module>
 :local(.style) {
   .price {

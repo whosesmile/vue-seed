@@ -4,7 +4,7 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="ERROR" />
+      <ex-title title="NOT FOUND" />
     </ex-header>
     <ex-content>
       <div class="feedback">
@@ -15,7 +15,8 @@
         <div class="describe">HMMM, SOMETHING IS NOT RIGHT?</div>
       </div>
       <div class="vspace hspace">
-        <a class="button default" @click="reload()">RETRY</a>
+        <a class="button plain-primary" @click="$router.back()">RETURN</a>
+        <a class="button default" @click="reload()">RELOAD</a>
       </div>
     </ex-content>
   </ex-view>

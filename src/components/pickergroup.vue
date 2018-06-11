@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import Env from '../utils/env';
 export default {
   props: {
     adjust: { type: Boolean },

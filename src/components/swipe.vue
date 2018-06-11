@@ -11,7 +11,6 @@
   </div>
 </template>
 <script>
-import Env from '../utils/env';
 import Emitter from '../utils/emitter';
 class Slide extends Emitter {
   constructor(params) {
@@ -27,17 +26,17 @@ class Slide extends Emitter {
     }
 
     // 添加事件
-    this.roller.addEventListener('touchstart', this.touchstart, Env.supportPassive ? { passive: false } : false);
-    this.roller.addEventListener('touchmove', this.touchmove, Env.supportPassive ? { passive: false } : false);
-    this.roller.addEventListener('touchend', this.touchend, Env.supportPassive ? { passive: false } : false);
+    this.roller.addEventListener('touchstart', this.touchstart);
+    this.roller.addEventListener('touchmove', this.touchmove);
+    this.roller.addEventListener('touchend', this.touchend);
   }
 
   // 释放绑定
   release() {
     clearInterval(this.timer);
-    this.roller.removeEventListener('touchstart', this.touchstart, Env.supportPassive ? { passive: false } : false);
-    this.roller.removeEventListener('touchmove', this.touchmove, Env.supportPassive ? { passive: false } : false);
-    this.roller.removeEventListener('touchend', this.touchend, Env.supportPassive ? { passive: false } : false);
+    this.roller.removeEventListener('touchstart', this.touchstart);
+    this.roller.removeEventListener('touchmove', this.touchmove);
+    this.roller.removeEventListener('touchend', this.touchend);
   }
 
   // 抛出事件
