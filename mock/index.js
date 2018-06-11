@@ -1,7 +1,7 @@
 let Koa = require('koa');
 let colors = require('colors/safe');
 
-let port = 3000;
+let port = 3001;
 let mills = 300;
 
 // init koa
