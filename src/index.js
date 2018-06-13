@@ -7,11 +7,13 @@ import 'core-js/es6/promise';
 import './less/index.less';
 import './utils/axios';
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import store from './ducks';
 import { routes } from './schema';
 import * as lib from './components';
 
+Vue.use(VueI18n);
 Vue.use(VueRouter);
 
 // 工具方法
@@ -23,6 +25,7 @@ Object.keys(lib).forEach(name => {
   Vue.component(`ex-${kebabCase(name)}`, lib[name]);
 });
 
+// 组装路由
 const router = new VueRouter({
   mode: 'history',
   fallback: true,
@@ -32,7 +35,7 @@ const router = new VueRouter({
   ],
 });
 
-// 首页特殊处理
+// 首页处理 (TODO 也许有更好的办法)
 router.beforeEach((to, from, next) => {
   const index = ['/', '/category', '/cart', '/usercenter'].indexOf(to.path);
   if (index !== -1) {
@@ -48,5 +51,11 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
+// 国际化
+const i18n = new VueI18n({
+  locale: 'en', // en/zh
+  messages: {},
+});
 
-new Vue({ store, router }).$mount('#bootstrap');
+// LET'S GO
+new Vue({ store, router, i18n }).$mount('#bootstrap');

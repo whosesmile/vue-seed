@@ -3,31 +3,34 @@
     <slot />
     <div class="loadmore" v-if="loading">
       <i class="loading" />
-      <span class="tips text-gray">{{tips}}</span>
+      <span class="tips text-gray">{{$t('tips')}}</span>
     </div>
     <div class="feedback" v-else-if="list.length === 0">
       <div class="mark">
         <img width="197" height="98" src="//img1.qdingnet.com/c50aee1127e2b6a075250a6b26629bd2.png" alt="空白" />
       </div>
-      <div class="describe" v-if="blank">{{blank}}</div>
+      <div class="describe">{{$t('blank')}}</div>
     </div>
-    <div class="divider" ui-mode="30%" v-else-if="isEnds">{{ends}}</div>
+    <div class="divider" ui-mode="30%" v-else-if="isEnds">{{$t('ends')}}</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 export default {
+  i18n: {
+    messages: {
+      en: { tips: 'Loading...', ends: 'NO MORE', blank: 'Nothing' },
+      zh: { tips: '努力加载中', ends: '亲，我是有底线的', blank: '没有相关数据' }
+    }
+  },
   props: {
     url: { type: String, required: true },
     callback: { type: Function, default: n => n },
     list: { type: Array, default: () => [] }, // 默认值 比如从vuex中恢复时
     query: { type: Object, default: () => ({}) }, // 查询参数
     size: { type: Number, default: 20 },
-    threshold: { type: Number, default: 300 }, // 阈值
-    tips: { type: String, default: '努力加载中' }, // 加载文案
-    ends: { type: String, default: '亲，我是有底线的' }, // 终点提示文案 传空就是不显示
-    blank: { type: String, default: '没有相关数据' } // 空列表提示文案 传空就是不显示
+    threshold: { type: Number, default: 300 } // 阈值
   },
   data() {
     return {
@@ -38,8 +41,8 @@ export default {
   },
   computed: {
     isEnds: function() {
-      // 达到极限 显示提示 (首页不展示ends信息)
-      return this.ends && this.page > 1 && this.page * this.size > this.items.length;
+      // 首页不展示ends信息
+      return this.page > 1 && this.page * this.size > this.items.length;
     }
   },
   watch: {
