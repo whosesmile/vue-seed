@@ -37,16 +37,16 @@ import UserCenter from './components/usercenter';
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('landing/home');
 export default {
-  data() {
-    return {
-      animate: 'ex-move-ltr'
-    };
-  },
   components: {
     'ex-landing-home': Home,
     'ex-landing-category': Category,
     'ex-landing-cart': Cart,
     'ex-landing-usercenter': UserCenter
+  },
+  data() {
+    return {
+      animate: 'ex-move-ltr'
+    };
   },
   computed: {
     ...mapState(['index']),

@@ -10,6 +10,13 @@ export default {
       style: { marginTop: 0, marginBottom: 0 }
     };
   },
+  mounted() {
+    this.adjustMargin();
+  },
+  // 防止动态增删顶部和底部的Bar
+  updated() {
+    this.adjustMargin();
+  },
   methods: {
     // HEADER FOOTER 间距处理
     adjustMargin() {
@@ -27,13 +34,6 @@ export default {
         this.style.marginBottom = '0px';
       }
     }
-  },
-  mounted() {
-    this.adjustMargin();
-  },
-  // 防止动态增删顶部和底部的Bar
-  updated() {
-    this.adjustMargin();
   }
 };
 </script>

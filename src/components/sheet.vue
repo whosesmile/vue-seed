@@ -23,9 +23,6 @@ export default {
     dismiss: { type: Function, default: n => n },
     buttons: { type: Array, default: () => [] }
   },
-  methods: {
-    enter: (el, done) => done()
-  },
   computed: {
     // 转换为二维数组
     list: function() {
@@ -35,6 +32,9 @@ export default {
       }
       return list;
     }
+  },
+  methods: {
+    enter: (el, done) => done()
   }
 };
 </script>

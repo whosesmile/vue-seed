@@ -7,7 +7,7 @@
     <div class="list" v-for="items in list" :key="items.text">
       <div class="item">
         <div class="text">{{items.text}}</div>
-        <router-link class="text-sm link" :to="{path:'/product/category', query:{type: items.text}}">More</router-link>
+        <router-link class="text-sm link" v-if="items.subList.length > 2" :to="{path:'/product/category', query:{type: items.text}}">More</router-link>
       </div>
       <router-link class="item" v-for="(item, idx) in items.subList.slice(0,2)" :key="idx" :to="`/product/details/${item.productId}`">
         <div class="avatar" :class="{soldout: item.productStatus === 4}">
@@ -33,11 +33,11 @@ export default {
   computed: {
     ...mapState(['list'])
   },
-  methods: {
-    ...mapActions(['listItems'])
-  },
   mounted() {
     this.listItems();
+  },
+  methods: {
+    ...mapActions(['listItems'])
   }
 };
 </script>

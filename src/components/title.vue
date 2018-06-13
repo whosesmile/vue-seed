@@ -9,11 +9,6 @@ export default {
   props: {
     title: { type: String }
   },
-  mounted() {
-    if (this.title) {
-      document.title = this.title;
-    }
-  },
   computed: {
     slogan() {
       if (this.title === 'BITMAIN') {
@@ -27,6 +22,11 @@ export default {
       if (newVal !== oldVal) {
         document.title = this.title;
       }
+    }
+  },
+  mounted() {
+    if (this.title) {
+      document.title = this.title;
     }
   }
 };

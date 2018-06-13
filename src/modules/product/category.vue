@@ -38,11 +38,11 @@ export default {
       return list ? list.subList : [];
     }
   },
-  methods: {
-    ...mapActions(['listItems'])
-  },
   mounted() {
     this.listItems();
+  },
+  methods: {
+    ...mapActions(['listItems'])
   }
 };
 </script>

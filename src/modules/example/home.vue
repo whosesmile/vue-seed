@@ -102,6 +102,7 @@ export default {
   },
   watch: {
     count() {
+      // eslint-disable-next-line
       console.log(this.count);
     }
   },
@@ -119,6 +120,7 @@ export default {
           title: '温馨提示',
           message: '六千年和一瞬间',
           dismiss: () => {
+            // eslint-disable-next-line
             console.log('你点击了空白');
             this.$store.dispatch('hideModal');
           },
@@ -126,6 +128,7 @@ export default {
             {
               text: '取消',
               onClick: () => {
+                // eslint-disable-next-line
                 console.log('你点击了取消');
                 this.$store.dispatch('hideModal');
               }
@@ -133,6 +136,7 @@ export default {
             {
               text: '确定',
               onClick: () => {
+                // eslint-disable-next-line
                 console.log('你点击了确定');
                 this.$store.dispatch('hideModal');
               }
@@ -149,6 +153,7 @@ export default {
           title: '警告',
           message: '确定要删除订单吗？',
           dismiss: () => {
+            // eslint-disable-next-line
             console.log('你点击了空白');
             this.$store.dispatch('hideSheet');
           },
@@ -158,6 +163,7 @@ export default {
                 text: '删除',
                 class: 'text-warning',
                 onClick: () => {
+                  // eslint-disable-next-line
                   console.log('你点击了删除');
                   this.$store.dispatch('hideSheet');
                   axios.get('/api/landing/home').then(() => {
@@ -174,6 +180,7 @@ export default {
                 text: '放弃',
                 class: 'text-gray',
                 onClick: () => {
+                  // eslint-disable-next-line
                   console.log('你点击了放弃');
                   this.$store.dispatch('hideSheet');
                 }
@@ -240,6 +247,7 @@ export default {
           // 更新选中索引 便于下次打开恢复上次选择
           this.checked = checked;
           this.picker.show = false;
+          // eslint-disable-next-line
           console.log('你选择了:', list.map(item => item.name).join(''));
         }
       };

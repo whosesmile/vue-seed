@@ -42,12 +42,6 @@ export default {
       return this.ends && this.page > 1 && this.page * this.size > this.items.length;
     }
   },
-  mounted: function() {
-    this.listener();
-  },
-  destroyed() {
-    this.release();
-  },
   watch: {
     url: function(newVal, oldVal) {
       this.reload();
@@ -58,6 +52,12 @@ export default {
         this.reload();
       }
     }
+  },
+  mounted: function() {
+    this.listener();
+  },
+  destroyed() {
+    this.release();
   },
   methods: {
     // 提供一个方法用于重置数据 并重新加载
@@ -119,7 +119,9 @@ export default {
         .get(this.url, {
           params: { page: this.page + 1, size: this.size, ...this.query },
           global: false, // 不触发全局事件(Toast提示)
-          cancelToken: new axios.CancelToken(cancel => (this.cancel = cancel))
+          cancelToken: new axios.CancelToken(cancel => {
+            this.cancel = cancel;
+          })
         })
         .then(({ data }) => {
           this.loading = false;

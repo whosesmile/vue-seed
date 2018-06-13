@@ -38,6 +38,14 @@ export default {
     const checkedImpl = [...(this.checked || Array(groupsImpl.length).fill(-1))];
     return { groupsImpl, checkedImpl };
   },
+  computed: {
+    disabled() {
+      return this.groupsImpl.some((items, index) => {
+        const item = items[this.checkedImpl[index]];
+        return item && item.disabled;
+      });
+    }
+  },
   watch: {
     checked(newVal, oldVal) {
       if (newVal !== oldVal) {
@@ -49,14 +57,6 @@ export default {
         this.groupsImpl.splice(0, this.groupsImpl.length, ...this.groups);
         this.checkedImpl.splice(0, this.checkedImpl.length, ...(this.checked || Array(this.groupsImpl.length).fill(-1)));
       }
-    }
-  },
-  computed: {
-    disabled() {
-      return this.groupsImpl.some((items, index) => {
-        const item = items[this.checkedImpl[index]];
-        return item && item.disabled;
-      });
     }
   },
   methods: {

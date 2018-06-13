@@ -27,8 +27,16 @@ export default {
       animating: this.animation
     };
   },
-  mounted() {
-    this.adjustOffset(true);
+  computed: {
+    style: function() {
+      return {
+        transform: `translate3d(0,${this.translate}px,0)`,
+        transition: this.animating ? 'transform .3s, -webkit-transform .3s' : 'none'
+      };
+    },
+    volume: function() {
+      return this.height / this.itemHeight;
+    }
   },
   watch: {
     index(newVal, oldVal) {
@@ -42,16 +50,8 @@ export default {
       }
     }
   },
-  computed: {
-    style: function() {
-      return {
-        transform: `translate3d(0,${this.translate}px,0)`,
-        transition: this.animating ? 'transform .3s, -webkit-transform .3s' : 'none'
-      };
-    },
-    volume: function() {
-      return this.height / this.itemHeight;
-    }
+  mounted() {
+    this.adjustOffset(true);
   },
   methods: {
     label(item) {

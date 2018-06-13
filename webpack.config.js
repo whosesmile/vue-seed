@@ -32,7 +32,8 @@ module.exports = function (env, args) {
       path: path.resolve(__dirname, 'dist'),
       publicPath: '/',
     },
-
+    // https://github.com/webpack/webpack/issues/3486
+    performance: { hints: false },
     resolve: {
       extensions: ['.js', '.jsx', '.vue'],
       alias: {
@@ -103,7 +104,13 @@ module.exports = function (env, args) {
         use: ['file-loader'],
       }, {
         test: /\.vue$/,
-        loader: ['vue-loader'],
+        exclude: /(node_modules|bower_components)/,
+        use: ['vue-loader'],
+      }, {
+        enforce: 'pre',
+        test: /\.vue$/,
+        exclude: /(node_modules|bower_components)/,
+        use: ['eslint-loader'],
       }, {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,

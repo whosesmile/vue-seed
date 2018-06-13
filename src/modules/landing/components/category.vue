@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('landing/home');
 export default {
@@ -59,7 +58,6 @@ export default {
       return document.documentElement.clientHeight - 44 - 50 + 'px';
     },
     listener() {
-      console.log(this);
       this.height = this.getHeight();
     }
   }

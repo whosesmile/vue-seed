@@ -25,11 +25,11 @@ export default {
   computed: {
     ...mapState(['product'])
   },
-  methods: {
-    ...mapActions(['getProduct'])
-  },
   mounted() {
     this.getProduct({ productId: this.$route.params.id });
+  },
+  methods: {
+    ...mapActions(['getProduct'])
   }
 };
 </script>
