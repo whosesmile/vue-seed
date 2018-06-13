@@ -52,6 +52,7 @@ const errorHandler = (message = '参数异常或格式不正确') => {
 };
 
 axios.defaults.timeout = 20000;
+axios.defaults.withCredentials = true;
 axios.defaults.headers.common['x-requested-with'] = 'XMLHttpRequest';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
