@@ -10,12 +10,14 @@ const ChunkRenamePlugin = require('webpack-chunk-rename-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // 不带版本 (整合工程到后端,后端提供版本识别;否则使用自带版本命名规则)
-const SCRIPT_FORMAT = '[name].[chunkhash].js';
-const STYLES_FORMAT = '[name].[contenthash:20].css';
+const SCRIPT_FORMAT = '[name].[chunkhash:8].js';
+const STYLES_FORMAT = '[name].[contenthash:8].css';
+// const SCRIPT_FORMAT = '[name].bundle.js';
+// const STYLES_FORMAT = '[name].bundle.css';
 
 // 自带版本
-const SCRIPT_CHUNK = '[name].[chunkhash].js';
-const STYLES_CHUNK = '[name].[contenthash:20].css';
+const SCRIPT_CHUNK = '[name].[chunkhash:8].js';
+const STYLES_CHUNK = '[name].[contenthash:8].css';
 
 module.exports = function (env, args) {
   return {
@@ -124,7 +126,7 @@ module.exports = function (env, args) {
       historyApiFallback: true,
       proxy: {
         '/api': {
-          target: 'http://localhost:3000',
+          target: 'http://localhost:3001',
           pathRewrite: { '^/api': '' },
         }
       }

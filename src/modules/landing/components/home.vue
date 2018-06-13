@@ -10,7 +10,7 @@
         <router-link class="text-sm link" :to="{path:'/product/category', query:{type: items.text}}">More</router-link>
       </div>
       <router-link class="item" v-for="(item, idx) in items.subList.slice(0,2)" :key="idx" :to="`/product/details/${item.productId}`">
-        <div class="avatar">
+        <div class="avatar" :class="{soldout: item.productStatus === 4}">
           <img width="120" height="95" :src="item.img" />
         </div>
         <div class="text">
@@ -48,6 +48,22 @@ export default {
   }
   .list .icon img {
     display: block;
+  }
+  .avatar.soldout {
+    img {
+      filter: grayscale(1);
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: transparent url(//img1.qdingnet.com/ab4f49725e394e3a045a404d29301bf4.svg) 0 0 no-repeat;
+      background-size: cover;
+    }
   }
 }
 </style>
