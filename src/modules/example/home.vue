@@ -56,6 +56,11 @@
           <div class="text">步进器</div>
           <i class="icon text-gray">&#xe61a;</i>
         </div>
+        <div class="item-divider">Tabview</div>
+        <router-link class="item" to="/example/tabview">
+          <div class="text">选项卡</div>
+          <i class="icon text-gray">&#xe61a;</i>
+        </router-link>
       </div>
     </ex-content>
 

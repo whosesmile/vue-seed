@@ -53,8 +53,34 @@ router.beforeEach((to, from, next) => {
 
 // 国际化
 const i18n = new VueI18n({
-  locale: 'en', // en/zh
-  messages: {},
+  locale: 'en', // en|zh
+  fallbackLocale: 'en',
+  numberFormats: {
+    en: {
+      currency: {
+        style: 'currency',
+        currency: 'USD',
+      }
+    },
+    zh: {
+      currency: {
+        style: 'currency',
+        currency: 'CNY',
+      }
+    },
+  },
+});
+
+// 过滤器
+Vue.filter('currency', function (num) {
+  num = Number(num);
+  if (isNaN(num)) {
+    return 'NaN';
+  }
+  if (i18n.locale === 'zh') {
+    return '￥' + num;
+  }
+  return '$' + num;
 });
 
 // LET'S GO

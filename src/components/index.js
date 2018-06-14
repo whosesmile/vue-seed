@@ -19,6 +19,8 @@ import Loader from './loader';
 import Image from './image';
 import Swipe from './swipe';
 import Stepper from './stepper';
+import Tabview from './tabview';
+import Tab from './tab';
 
 export {
   App,
@@ -42,4 +44,6 @@ export {
   Image,
   Swipe,
   Stepper,
+  Tabview,
+  Tab,
 };
