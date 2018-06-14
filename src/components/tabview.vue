@@ -14,7 +14,7 @@
 import { raf } from '../utils/raf';
 export default {
   props: {
-    index: { type: Number, default: 0 },
+    value: { type: Number, default: 0 },
     duration: { type: Number, default: 300 }
   },
   data() {
@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.tabIndex = this.index;
+    this.tabIndex = this.value;
   },
   methods: {
     append(tab) {
@@ -42,6 +42,7 @@ export default {
     setIndex(index) {
       this.tabIndex = index;
       this.animate();
+      this.$emit('input', index);
       this.$emit('click', index, this.tabs[index]);
     },
     animate() {

@@ -4,7 +4,7 @@
       <ex-menu class="text-gray" @click="$router.back()">
         <i class="icon">&#xe60e;</i>
       </ex-menu>
-      <ex-title title="选项卡 (抄有赞)" />
+      <ex-title title="选项卡 (参考有赞)" />
     </ex-header>
     <ex-content>
       <ex-tabview>
@@ -28,11 +28,22 @@
           {{item}}
         </ex-tab>
       </ex-tabview>
+
+      <div class="divider" ui-mode="25%">双向绑定:v-model</div>
+
+      <ex-tabview v-model="index">
+        <ex-tab v-for="(item, idx) in labels(4)" :key="idx" :title="item">
+          当前TAB为: {{index}}
+        </ex-tab>
+      </ex-tabview>
     </ex-content>
   </ex-view>
 </template>
 <script>
 export default {
+  data() {
+    return { index: 3 };
+  },
   methods: {
     labels(n) {
       let list = [];
