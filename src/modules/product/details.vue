@@ -17,6 +17,11 @@
           <div class="price text-primary text-strong text-xl">{{product.price|currency}}</div>
           <div class="weight text-xs text-gray">{{$t('weight')}}: {{product.weight}} kg</div>
         </div>
+        <ex-tabview>
+          <ex-tab v-for="item in product.tabinfo" :key="item.id" :title="item.modelName">
+            <section class="rich-text article" v-html="item.moreInfo" />
+          </ex-tab>
+        </ex-tabview>
       </template>
     </ex-content>
     <ex-footer class="btm-fixed">
@@ -77,6 +82,9 @@ export default {
     .price {
       margin: 3px 0 8px;
     }
+  }
+  .article {
+    padding: 0;
   }
 }
 </style>
